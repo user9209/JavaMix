@@ -1,0 +1,2 @@
+# JavaMix
+Some java projects
