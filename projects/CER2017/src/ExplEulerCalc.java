@@ -10,13 +10,13 @@ public class ExplEulerCalc {
         double t0 = 0;
         double x0 = 0;
 
-        RK4Element x0e = new RK4Element(x0,x0,t0, h);
-        RK4Element x1e = nextExplEuler(x0e);
-        RK4Element x2e = nextExplEuler(x1e);
-        RK4Element x3e = nextExplEuler(x2e);
-        RK4Element x4e = nextExplEuler(x3e);
+        ValueElement x0e = new ValueElement(x0,t0, h);
+        ValueElement x1e = nextExplEuler(x0e);
+        ValueElement x2e = nextExplEuler(x1e);
+        ValueElement x3e = nextExplEuler(x2e);
+        ValueElement x4e = nextExplEuler(x3e);
 
-        if(Global.defaultFunction && Math.abs(x1e.currValue - 0.9450d) > 0.01d)
+        if(Global.defaultFunction && Math.abs(x1e.value - 0.9450d) > 0.01d)
         {
             throw new RuntimeException("ExplEulerCalc - Test failed");
         }
@@ -29,9 +29,9 @@ public class ExplEulerCalc {
 
     }
 
-    public static RK4Element nextExplEuler(RK4Element curr)
+    public static ValueElement nextExplEuler(ValueElement curr)
     {
-        double x1 = curr.currValue + Global.function(curr.currValue,curr.currT);
-        return new RK4Element(x1,curr.currValue, curr.currT + curr.currH, curr.currH);
+        double x1 = curr.value + Global.function(curr.value,curr.t);
+        return new ValueElement(x1, curr.t + curr.h, curr.h);
     }
 }

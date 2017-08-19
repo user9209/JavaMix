@@ -10,13 +10,13 @@ public class RK4Calc {
         double t0 = 0;
         double x0 = 0;
 
-        RK4Element x0e = new RK4Element(x0,x0,t0, h);
-        RK4Element x1e = nextRK4(x0e);
-        RK4Element x2e = nextRK4(x1e);
-        RK4Element x3e = nextRK4(x2e);
-        RK4Element x4e = nextRK4(x3e);
+        ValueElement x0e = new ValueElement(x0,t0, h);
+        ValueElement x1e = nextRK4(x0e);
+        ValueElement x2e = nextRK4(x1e);
+        ValueElement x3e = nextRK4(x2e);
+        ValueElement x4e = nextRK4(x3e);
 
-        if(Global.defaultFunction && Math.abs(x1e.currValue - 0.7064d) > 0.01d)
+        if(Global.defaultFunction && Math.abs(x1e.value - 0.7064d) > 0.01d)
         {
             throw new RuntimeException("RK4Calc - Test failed");
         }
@@ -28,16 +28,16 @@ public class RK4Calc {
 
     }
 
-    public static RK4Element nextRK4(RK4Element curr)
+    public static ValueElement nextRK4(ValueElement curr)
     {
-        double s1 = Global.function(curr.currValue,curr.currT);
-        double s2 = Global.function(curr.currValue + 0.5 *curr.currH * s1,curr.currT + 0.5 * curr.currH);
-        double s3 = Global.function(curr.currValue + 0.5 *curr.currH * s2,curr.currT + 0.5 * curr.currH);
-        double s4 = Global.function(curr.currValue + curr.currH * s3,curr.currT + curr.currH);
+        double s1 = Global.function(curr.value,curr.t);
+        double s2 = Global.function(curr.value + 0.5 *curr.h * s1,curr.t + 0.5 * curr.h);
+        double s3 = Global.function(curr.value + 0.5 *curr.h * s2,curr.t + 0.5 * curr.h);
+        double s4 = Global.function(curr.value + curr.h * s3,curr.t + curr.h);
 
         System.out.println("s1 = " + s1 + " s2 = " + s2 + " s3 = " + s3 + " s4 = " + s4);
 
-        double x1 = curr.currValue + curr.currH / 6d *(s1 + 2 * s2 + 2* s3 + s4);
-        return new RK4Element(x1,curr.currValue, curr.currT + curr.currH, curr.currH);
+        double x1 = curr.value + curr.h / 6d *(s1 + 2 * s2 + 2* s3 + s4);
+        return new ValueElement(x1,curr.t + curr.h, curr.h);
     }
 }
