@@ -10,14 +10,13 @@ public class HeunCalc {
         double t0 = 0;
         double x0 = 0;
 
-        ValueElement x0e = new ValueElement(x0,t0, h);
+        ValueElement x0e = new ValueElement(x0, t0, h);
         ValueElement x1e = nextHeun(x0e);
         ValueElement x2e = nextHeun(x1e);
         ValueElement x3e = nextHeun(x2e);
         ValueElement x4e = nextHeun(x3e);
 
-        if(Global.defaultFunction && Math.abs(x1e.value - 0.6609d) > 0.01d)
-        {
+        if (Global.defaultFunction && Math.abs(x1e.value - 0.6609d) > 0.01d) {
             throw new RuntimeException("HeunCalc - Test failed");
         }
 
@@ -29,14 +28,13 @@ public class HeunCalc {
 
     }
 
-    public static ValueElement nextHeun(ValueElement curr)
-    {
-        double s1 = Global.function(curr.value,curr.t);
-        double s2 = Global.function(curr.value + curr.h * s1,curr.t + curr.h);
+    public static ValueElement nextHeun(ValueElement curr) {
+        double s1 = Global.function(curr.value, curr.t);
+        double s2 = Global.function(curr.value + curr.h * s1, curr.t + curr.h);
 
         System.out.println("s1 = " + s1 + " s2 = " + s2);
 
-        double x1 = curr.value + curr.h / 2d *(s1 + s2);
+        double x1 = curr.value + curr.h / 2d * (s1 + s2);
         return new ValueElement(x1, curr.t + curr.h, curr.h);
     }
 }

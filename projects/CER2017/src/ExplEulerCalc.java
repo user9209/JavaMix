@@ -10,14 +10,13 @@ public class ExplEulerCalc {
         double t0 = 0;
         double x0 = 0;
 
-        ValueElement x0e = new ValueElement(x0,t0, h);
+        ValueElement x0e = new ValueElement(x0, t0, h);
         ValueElement x1e = nextExplEuler(x0e);
         ValueElement x2e = nextExplEuler(x1e);
         ValueElement x3e = nextExplEuler(x2e);
         ValueElement x4e = nextExplEuler(x3e);
 
-        if(Global.defaultFunction && Math.abs(x1e.value - 0.9450d) > 0.01d)
-        {
+        if (Global.defaultFunction && Math.abs(x1e.value - 0.9450d) > 0.01d) {
             throw new RuntimeException("ExplEulerCalc - Test failed");
         }
 
@@ -29,9 +28,8 @@ public class ExplEulerCalc {
 
     }
 
-    public static ValueElement nextExplEuler(ValueElement curr)
-    {
-        double x1 = curr.value + Global.function(curr.value,curr.t);
+    public static ValueElement nextExplEuler(ValueElement curr) {
+        double x1 = curr.value + Global.function(curr.value, curr.t);
         return new ValueElement(x1, curr.t + curr.h, curr.h);
     }
 }

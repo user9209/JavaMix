@@ -15,8 +15,7 @@ public class ValueElement {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "@ " + t + " = " + value + " with h = " + h;
     }
 }
