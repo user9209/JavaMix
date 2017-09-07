@@ -2,8 +2,38 @@ public class Main {
 
     public static void main(String[] args) {
 
-        askForTask();
+        findMD5();
+        //askForTask();
         //previousSplit();
+    }
+
+    public static void findMD5()
+    {
+        System.out.println(MD5.getMD5(Integer.toBinaryString(500)));
+        MD5Finder runnable1 = new MD5Finder(MD5.getMD5(Integer.toBinaryString(500)));
+        MD5Finder runnable2 = new MD5Finder(MD5.getMD5(Integer.toBinaryString(500)));
+        MD5Finder runnable3 = new MD5Finder(MD5.getMD5(Integer.toBinaryString(500)));
+        MD5Finder runnable4 = new MD5Finder(MD5.getMD5(Integer.toBinaryString(500)));
+
+        Thread t1 = new Thread(runnable1);
+        Thread t2 = new Thread(runnable2);
+        Thread t3 = new Thread(runnable3);
+        Thread t4 = new Thread(runnable4);
+
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+
+        try {
+            int i = 0;
+            while (i++ < 1000 && !runnable1.hasFound() && !runnable2.hasFound() && !runnable3.hasFound() && !runnable4.hasFound() )
+                Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(runnable1.getPlaintext() + " " + runnable2.getPlaintext() + " " + runnable3.getPlaintext() + " " + runnable4.getPlaintext());
     }
 
     public static void askForTask()
