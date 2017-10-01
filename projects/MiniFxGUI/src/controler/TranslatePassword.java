@@ -3,6 +3,10 @@
  * All rights reserved
  * Licensing with individual contract possible, written contract necessary.
  *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *
  * Created on 10-2017.
  */
 package controler;
