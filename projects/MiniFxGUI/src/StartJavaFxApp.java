@@ -4,6 +4,7 @@
  */
 
 import controler.JREversion;
+import controler.TranslatePassword;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -15,6 +16,7 @@ public class StartJavaFxApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        JREversion.buildStage();
+        //JREversion.buildStage();
+        TranslatePassword.buildStage();
     }
 }
