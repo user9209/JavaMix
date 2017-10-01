@@ -6,7 +6,7 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class BootFX extends Application {
+public class StartJavaFxApp extends Application {
 
     public static void startFX(){
         launch();
